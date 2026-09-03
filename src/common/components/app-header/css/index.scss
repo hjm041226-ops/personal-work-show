@@ -1,0 +1,53 @@
+// AppHeader —— 组件样式
+// tokens/mixins 已由 vite additionalData 注入，无需重复 @use
+
+.pf-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 50;
+  width: 100%;
+  background-color: $color-surface-80;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.04);
+
+  &__container {
+    @include container;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: $header-height;
+  }
+
+  &__brand {
+    @include type('headline-sm');
+    color: $color-on-surface;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  &__nav {
+    display: none;
+    align-items: center;
+    gap: $space-md;
+    @include respond(md) {
+      display: flex;
+    }
+  }
+
+  &__link {
+    @include type('body-md');
+    color: $color-on-surface-variant;
+    transition: color 0.2s ease;
+
+    &:hover {
+      color: $color-on-surface;
+    }
+
+    &--active {
+      color: $color-primary;
+      font-weight: 700;
+    }
+  }
+}

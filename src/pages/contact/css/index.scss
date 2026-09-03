@@ -1,0 +1,187 @@
+// 联系我页 —— 组件样式（对应 demo「联系我页面」，已移除左侧分类导航侧边栏）
+// tokens/mixins 已由 vite additionalData 注入
+
+.page-contact {
+  width: 100%;
+  min-height: 100vh;
+  padding-top: $header-height;
+  background-color: $color-surface;
+
+  &__layout {
+    @include container;
+    width: 100%;
+    padding-block: $space-lg $space-2xl;
+  }
+
+  &__column {
+    width: 100%;
+    max-width: 56rem; // max-w-4xl 内容列
+    margin-inline: auto;
+  }
+
+  // ---------- 标题区 ----------
+  &__heading {
+    margin-bottom: $space-xl;
+  }
+
+  &__eyebrow {
+    display: block;
+    margin-bottom: $space-xs;
+    @include type('label-sm');
+    color: $color-primary;
+    text-transform: uppercase;
+    letter-spacing: 0.1em; // tracking-widest
+  }
+
+  &__title {
+    margin: 0 0 $space-sm;
+    @include headline-fluid('headline-xl');
+    color: $color-on-surface;
+  }
+
+  &__intro {
+    margin: 0;
+    @include type('body-lg');
+    color: $color-on-surface-variant;
+  }
+
+  // ---------- 网格：表单 2/3 + 信息 1/3 ----------
+  &__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: $space-xl;
+
+    @include respond(lg) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  &__form-card {
+    padding: $space-lg;
+    border: 1px solid $color-outline-variant-20;
+    border-radius: $radius-xl;
+    background-color: $color-surface-container-low;
+
+    @include respond(lg) {
+      grid-column: span 2;
+    }
+  }
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+    gap: $space-md;
+  }
+
+  &__field {
+    display: flex;
+    flex-direction: column;
+    gap: $space-3xs;
+  }
+
+  &__label {
+    @include type('label-md');
+    color: $color-on-surface;
+  }
+
+  // antd 输入框还原 demo 样式
+  &__input.ant-input,
+  &__input :deep(.ant-input),
+  &__textarea.ant-input,
+  &__textarea :deep(.ant-input) {
+    height: auto;
+    padding: $space-xs; // p-space-xs
+    border: 1px solid $color-outline-variant-30;
+    border-radius: $radius-lg;
+    background-color: $color-surface;
+    @include type('body-md');
+    color: $color-on-surface;
+    box-shadow: none;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+
+    &::placeholder {
+      color: $color-outline;
+    }
+
+    &:hover {
+      border-color: $color-outline-variant;
+    }
+
+    &:focus,
+    &:focus-within {
+      border-color: $color-primary;
+      box-shadow: none;
+    }
+  }
+
+  &__textarea,
+  &__textarea :deep(.ant-input) {
+    min-height: 9rem; // h-36
+    resize: none;
+  }
+
+  &__submit.ant-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: auto;
+    padding: $space-xs $space-md; // px-space-md py-space-xs
+    border-radius: $radius-default;
+    @include type('label-md');
+    transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+  }
+
+  // ---------- 联系信息卡 ----------
+  &__info {
+    display: flex;
+    flex-direction: column;
+    gap: $space-md;
+  }
+
+  &__info-card {
+    display: flex;
+    flex-direction: column;
+    gap: $space-3xs;
+    padding: $space-lg;
+    border: 1px solid $color-outline-variant-20;
+    border-radius: $radius-xl;
+    background-color: $color-surface-container-low;
+  }
+
+  &__info-label {
+    @include type('label-sm');
+    color: $color-primary;
+    text-transform: uppercase;
+  }
+
+  &__info-value {
+    margin: 0;
+    @include type('headline-sm');
+    color: $color-on-surface;
+    overflow-wrap: anywhere;
+  }
+
+  &__info-desc {
+    margin: 0;
+    @include type('body-sm');
+    color: $color-on-surface-variant;
+  }
+
+  &__socials {
+    display: flex;
+    flex-direction: column;
+    gap: $space-2xs;
+    padding-top: $space-2xs;
+  }
+
+  &__social {
+    @include type('body-md');
+    color: $color-on-surface-variant;
+    transition: color 0.2s ease;
+
+    &:hover {
+      color: $color-primary;
+    }
+  }
+}

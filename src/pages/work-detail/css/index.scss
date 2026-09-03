@@ -1,0 +1,296 @@
+// 作品详情页 —— 组件样式（对应 demo「作品详情页」）
+// tokens/mixins 已由 vite additionalData 注入
+
+// 局部容器（与 demo 的 max-w-[1440px] mx-auto px-margin-page 一致）
+.pf-container {
+  max-width: $container-max;
+  margin-inline: auto;
+  padding-inline: $margin-page;
+  width: 100%;
+}
+
+.page-detail {
+  width: 100%;
+  min-height: 100vh;
+  padding-top: $header-height;
+  background-color: $color-surface;
+
+  &__column {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  &__back-row {
+    padding-top: $space-md;
+  }
+
+  &__back {
+    display: inline-flex;
+    align-items: center;
+    gap: $space-2xs;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    @include type('body-sm');
+    color: $color-on-surface-variant;
+    cursor: pointer;
+    transition: color 0.2s ease;
+
+    &:hover {
+      color: $color-primary;
+    }
+  }
+
+  &__back-icon {
+    font-size: 16px;
+    line-height: 1;
+  }
+
+  // ---------- 未找到 ----------
+  &__missing {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: $space-md;
+    padding-block: $space-2xl;
+  }
+
+  &__missing-title {
+    margin: 0;
+    @include type('headline-lg');
+    color: $color-on-surface;
+  }
+
+  &__missing-text {
+    margin: 0;
+    @include type('body-lg');
+    color: $color-on-surface-variant;
+  }
+
+  &__missing-btn.ant-btn {
+    height: auto;
+    padding: $space-xs $space-md;
+    border-radius: $radius-default;
+    @include type('label-md');
+  }
+
+  // ---------- 分节 ----------
+  &__section {
+    padding-top: $space-md;
+    padding-bottom: $space-md;
+
+    &--bottom {
+      padding-bottom: $space-2xl;
+    }
+  }
+
+  // ---------- 面包屑 + 标题 ----------
+  &__crumb {
+    display: flex;
+    align-items: center;
+    gap: $space-xs;
+    margin-bottom: $space-xs;
+  }
+
+  &__crumb-cat,
+  &__crumb-sub {
+    @include type('label-sm');
+    text-transform: uppercase;
+    letter-spacing: 0.1em; // tracking-widest
+  }
+
+  &__crumb-cat {
+    color: $color-primary;
+  }
+
+  &__crumb-sep {
+    color: $color-outline-variant;
+  }
+
+  &__crumb-sub {
+    color: $color-on-surface-variant;
+  }
+
+  &__title {
+    max-width: 56rem;
+    margin: 0;
+    @include headline-fluid('headline-xl');
+    color: $color-on-surface;
+  }
+
+  // ---------- 技术栈标签 ----------
+  &__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $space-xs;
+  }
+
+  &__tag {
+    display: inline-block;
+    padding: $space-3xs $space-xs; // px-space-xs py-space-3xs
+    border-radius: $radius-full;
+    background-color: $color-surface-container-highest;
+    @include type('label-md');
+    color: $color-on-surface;
+  }
+
+  // ---------- 功能介绍 ----------
+  &__desc {
+    max-width: 48rem;
+    margin: 0 0 $space-md;
+    @include type('body-lg');
+    color: $color-on-surface-variant;
+  }
+
+  &__hero {
+    position: relative;
+    width: 100%;
+    height: 550px;
+    overflow: hidden;
+    border-radius: $radius-xl;
+    background-color: $color-surface-container;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.03), 0 1px 6px -1px rgba(0, 0, 0, 0.02),
+      0 2px 4px 0 rgba(0, 0, 0, 0.02); // shadow-md 近似
+  }
+
+  &__hero-bg {
+    position: absolute;
+    inset: 0;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    transition: transform 0.7s ease;
+  }
+
+  // hover 仅限大图容器内部触发缩放（对应 demo 的 group-hover）
+  .page-detail__hero:hover &__hero-bg {
+    transform: scale(1.05);
+  }
+
+  &__hero-veil {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(35, 25, 22, 0.4), rgba(35, 25, 22, 0) 45%);
+  }
+
+  &__hero-bar {
+    position: absolute;
+    right: $space-md;
+    bottom: $space-md;
+    left: $space-md;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: $space-sm;
+    padding: $space-md;
+    border-radius: $radius-xl;
+    background-color: $color-surface-90;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+
+    @include respond(md) {
+      flex-direction: row;
+      align-items: center;
+    }
+  }
+
+  &__hero-status {
+    display: inline-flex;
+    align-items: center;
+    gap: $space-xs;
+  }
+
+  &__hero-dot {
+    width: 12px; // w-3
+    height: 12px; // h-3
+    border-radius: 50%;
+    background-color: $color-primary;
+    animation: page-detail-pulse 2s ease-in-out infinite;
+  }
+
+  &__hero-label {
+    @include type('label-md');
+    color: $color-on-surface;
+    text-transform: uppercase;
+    letter-spacing: 0.05em; // tracking-wider
+  }
+
+  &__hero-stats {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: $space-xs;
+  }
+
+  &__hero-stat {
+    @include type('body-sm');
+    color: $color-on-surface-variant;
+  }
+
+  &__hero-sep {
+    color: $color-outline-variant;
+  }
+
+  // ---------- GitHub CTA ----------
+  &__cta {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: $space-md;
+    padding: $space-lg;
+    border-radius: $radius-xl;
+    background-color: $color-surface-container-low;
+
+    @include respond(md) {
+      flex-direction: row;
+      align-items: center;
+    }
+  }
+
+  &__cta-text {
+    @include type('body-md');
+    font-weight: 500;
+    color: $color-on-surface;
+  }
+
+  &__cta-btn.ant-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: $space-2xs;
+    height: auto;
+    padding: $space-xs $space-md; // px-space-md py-space-xs
+    border: 1px solid $color-outline;
+    border-radius: $radius-default;
+    background-color: transparent;
+    @include type('label-md');
+    color: $color-on-surface;
+    transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+  }
+
+  // 覆盖 antd default 按钮的悬停行为（demo：hover 填充 surface-container-high、文字不变色）
+  .page-detail__cta-btn.page-detail__cta-btn.ant-btn:not(:disabled):hover,
+  .page-detail__cta-btn.page-detail__cta-btn.ant-btn:not(:disabled):focus {
+    border-color: $color-outline;
+    background-color: $color-surface-container-high;
+    color: $color-on-surface;
+  }
+
+  &__cta-icon {
+    font-size: 16px;
+    line-height: 1;
+  }
+}
+
+@keyframes page-detail-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.4;
+  }
+}

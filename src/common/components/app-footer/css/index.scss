@@ -1,0 +1,41 @@
+// AppFooter —— 组件样式
+
+.pf-footer {
+  width: 100%;
+  background-color: $color-surface-container-low;
+  padding-block: $space-xl;
+
+  &__container {
+    @include container;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    gap: $space-sm;
+
+    @include respond(md) {
+      flex-direction: row;
+    }
+  }
+
+  &__copyright {
+    @include type('body-sm');
+    margin: 0;
+    color: $color-on-surface-variant;
+  }
+
+  &__socials {
+    display: flex;
+    gap: $space-md;
+  }
+
+  &__link {
+    @include type('body-sm');
+    color: $color-on-surface-variant;
+    transition: color 0.2s ease;
+
+    &:hover {
+      color: $color-on-surface;
+    }
+  }
+}

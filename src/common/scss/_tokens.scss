@@ -1,0 +1,128 @@
+// ============================================================
+// 设计令牌 Design Tokens
+// 全部数值取自 demo（tailwind.config 覆盖值与 DESIGN.md）
+// ============================================================
+@use 'sass:map';
+
+// ---------- 颜色（Material You 暖色调，demo 使用到的全套） ----------
+$color-on-tertiary: #ffffff;
+$color-on-error-container: #93000a;
+$color-surface-tint: #a0401c;
+$color-inverse-surface: #392e2a;
+$color-outline-variant: #ddc0b7;
+$color-primary-container: #bd5630;
+$color-primary-fixed-dim: #ffb59c;
+$color-background: #fff8f6;
+$color-inverse-on-surface: #ffede8;
+$color-secondary-container: #ffab74;
+$color-secondary: #8e4e1f;
+$color-on-surface: #231916;
+$color-surface-container-highest: #f2ded8;
+$color-on-surface-variant: #56423c;
+$color-error: #ba1a1a;
+$color-on-secondary-container: #783d0f;
+$color-on-tertiary-fixed-variant: #004f53;
+$color-error-container: #ffdad6;
+$color-primary-fixed: #ffdbcf;
+$color-surface-container-lowest: #ffffff;
+$color-on-error: #ffffff;
+$color-surface-container-high: #f8e4de;
+$color-tertiary-fixed: #83f4fb;
+$color-on-primary-fixed: #390c00;
+$color-surface: #fff8f6;
+$color-tertiary-container: #008187;
+$color-on-primary-fixed-variant: #802a05;
+$color-tertiary-fixed-dim: #64d7de;
+$color-surface-variant: #f2ded8;
+$color-secondary-fixed-dim: #ffb689;
+$color-on-primary: #ffffff;
+$color-on-secondary-fixed-variant: #713708;
+$color-primary: #9d3e1a;
+$color-on-primary-container: #fffbff;
+$color-on-secondary: #ffffff;
+$color-on-secondary-fixed: #311300;
+$color-on-tertiary-fixed: #002022;
+$color-surface-dim: #ead6d0;
+$color-on-background: #231916;
+$color-surface-bright: #fff8f6;
+$color-on-tertiary-container: #f4ffff;
+$color-inverse-primary: #ffb59c;
+$color-surface-container: #feeae4;
+$color-surface-container-low: #fff1ed;
+$color-outline: #8a726a;
+$color-secondary-fixed: #ffdbc7;
+$color-tertiary: #00666b;
+
+// ---------- 字体 ----------
+$font-headline: 'Playfair Display', Georgia, 'Times New Roman', serif;
+$font-body: 'Plus Jakarta Sans', 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+
+// 字号 / 行高 / 字重 / 字距（来自 demo tailwind fontSize 扩展）
+$type-map: (
+  'headline-xl': (font: serif, size: 56px, lh: 64px, weight: 500, ls: -0.02em),
+  'headline-lg': (font: serif, size: 40px, lh: 48px, weight: 500, ls: -0.01em),
+  'headline-md': (font: serif, size: 28px, lh: 36px, weight: 500, ls: normal),
+  'headline-sm': (font: serif, size: 20px, lh: 28px, weight: 600, ls: normal),
+  'body-lg': (font: sans, size: 18px, lh: 28px, weight: 400, ls: normal),
+  'body-md': (font: sans, size: 15px, lh: 24px, weight: 400, ls: normal),
+  'body-sm': (font: sans, size: 13px, lh: 20px, weight: 400, ls: normal),
+  'label-md': (font: sans, size: 13px, lh: 16px, weight: 500, ls: 0.04em),
+  'label-sm': (font: sans, size: 11px, lh: 14px, weight: 500, ls: 0.06em),
+);
+
+// ---------- 间距 ----------
+$space-3xs: 0.25rem;
+$space-2xs: 0.5rem;
+$space-xs: 0.75rem;
+$space-sm: 1rem;
+$space-md: 1.5rem;
+$space-lg: 2.5rem;
+$space-xl: 4rem;
+$space-2xl: 6rem;
+$margin-page: 5vw;
+$gutter-grid: 2rem;
+
+// ---------- 圆角（以 demo 代码中的覆盖值为准，非 DESIGN.md） ----------
+$radius-default: 0.125rem; // rounded（2px）
+$radius-lg: 0.25rem; // rounded-lg（4px）
+$radius-xl: 0.5rem; // rounded-xl（8px）
+$radius-full: 0.75rem; // rounded-full（12px，demo 覆盖值）
+
+// ---------- 布局常量 ----------
+$container-max: 1440px;
+$header-height: 5rem; // h-20
+$page-top-space: $header-height; // main pt-20
+
+// ---------- 常用派生色（半透明叠加，来自 demo 的 /opacity 用法） ----------
+$color-surface-80: rgba(255, 248, 246, 0.8); // bg-surface/80（header）
+$color-surface-90: rgba(255, 248, 246, 0.9); // bg-surface/90（角标等）
+$color-outline-variant-20: rgba(221, 192, 183, 0.2); // border-outline-variant/20
+$color-outline-variant-30: rgba(221, 192, 183, 0.3); // border-outline-variant/30（输入框）
+$color-on-surface-40: rgba(35, 25, 22, 0.4); // 大图渐变遮罩 from-on-surface/40
+
+// ============================================================
+// 工具：排版
+// 用法：@include type('headline-xl');
+// ============================================================
+@mixin type($key) {
+  $t: map.get($type-map, $key);
+  @if map.get($t, 'font') == serif {
+    font-family: $font-headline;
+  } @else {
+    font-family: $font-body;
+  }
+  font-size: map.get($t, 'size');
+  line-height: map.get($t, 'lh');
+  font-weight: map.get($t, 'weight');
+  letter-spacing: map.get($t, 'ls');
+}
+
+// 小尺寸视口下大标题等比缩小 20%（DESIGN.md：超过 32px 的标题）
+@mixin headline-fluid($key) {
+  $t: map.get($type-map, $key);
+  @include type($key);
+  @media (max-width: 767.98px) {
+    font-size: calc(#{map.get($t, 'size')} * 0.8);
+    line-height: calc(#{map.get($t, 'lh')} * 0.8);
+  }
+}
