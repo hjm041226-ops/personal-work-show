@@ -1,18 +1,26 @@
-import { getWorks } from '@/common/composables/useProjectData'
+import { http } from '@/common/composables/useRequest'
 
 /**
- * 首页 —— API 请求函数
+ * 首页 —— API 请求函数（公开组契约 docs/前端对接契约(展示站).md）
  * 约定：每个方法第一个参数固定为 payload。
- * 本轮未接真实接口：fetchWorks 仅演示桩（返回本地数据），接入后替换为真实请求。
+ *  - P1 GET /works            作品列表（可带 categoryKey/keyword/limit/offset）
+ *  - P2 GET /works/categories 公开分类字典
  */
 export default {
   /**
-   * 获取作品列表
+   * 获取作品列表（P1）
    * @param {object} payload
-   * @param {object} [params] 查询参数（分类等）
+   * @param {object} [params] { categoryKey?, keyword?, limit?, offset? }
    */
   fetchWorks(payload, params = {}) {
-    // TODO 接入真实接口：return request.get('/works', { params })
-    return Promise.resolve(getWorks())
+    return http.get('/works', { params })
+  },
+
+  /**
+   * 获取公开分类字典（P2）
+   * @param {object} payload
+   */
+  fetchCategories(payload) {
+    return http.get('/works/categories')
   },
 }

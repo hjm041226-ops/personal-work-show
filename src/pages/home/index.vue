@@ -7,20 +7,20 @@ const payload = useHomeAssemble()
 <template>
   <main class="page-home">
     <div class="page-home__layout">
-      <!-- 分类导航（lg 下吸顶） -->
+      <!-- 分类导航（数据来自 P2 字典 + 首项「全部」，lg 下吸顶） -->
       <aside class="page-home__sidebar">
         <div class="cat-card">
           <span class="cat-card__title">分类导航</span>
           <nav class="cat-card__nav">
             <button
-              v-for="category in payload.categories"
-              :key="category"
+              v-for="option in payload.categories"
+              :key="option.key || '__all__'"
               type="button"
               class="cat-card__item"
-              :class="{ 'cat-card__item--active': payload.activeCategory === category }"
-              @click="payload.chooseCategory(category)"
+              :class="{ 'cat-card__item--active': payload.activeCategoryKey === option.key }"
+              @click="payload.chooseCategory(option.key)"
             >
-              {{ category }}
+              {{ option.label }}
             </button>
           </nav>
         </div>
@@ -28,14 +28,21 @@ const payload = useHomeAssemble()
 
       <!-- 主内容区 -->
       <div class="page-home__main">
-        <!-- 精选作品 -->
+        <!-- 精选作品（数据来自 P1 列表接口） -->
         <section class="works">
           <div class="works__top">
-            <span class="works__eyebrow">精选作品 / 2023-2024</span>
+            <span class="works__eyebrow">精选作品</span>
             <h1 class="works__title">打造数字工具、Web应用与算法实验。</h1>
           </div>
 
-          <div class="works__list">
+          <p v-if="payload.loading && payload.works.length === 0" class="works__state">
+            正在加载作品…
+          </p>
+          <p v-else-if="!payload.loading && payload.works.length === 0" class="works__state">
+            暂无作品
+          </p>
+
+          <div v-else class="works__list">
             <article
               v-for="(work, index) in payload.works"
               :key="work.id"
@@ -46,16 +53,16 @@ const payload = useHomeAssemble()
               <div class="work-card__media">
                 <div
                   class="work-card__media-bg"
-                  :style="{ backgroundImage: `url('${work.image}')` }"
+                  :style="work.image ? { backgroundImage: `url('${work.image}')` } : null"
                 ></div>
-                <span class="work-card__badge">{{ work.badge }}</span>
+                <span v-if="work.badge" class="work-card__badge">{{ work.badge }}</span>
               </div>
 
               <div class="work-card__body">
                 <div class="work-card__copy">
                   <h2 class="work-card__title">{{ work.title }}</h2>
-                  <p class="work-card__summary">{{ work.summary }}</p>
-                  <div class="work-card__tags">
+                  <p v-if="work.summary" class="work-card__summary">{{ work.summary }}</p>
+                  <div v-if="work.tags && work.tags.length" class="work-card__tags">
                     <span v-for="tag in work.tags" :key="tag" class="work-card__tag">
                       {{ tag }}
                     </span>

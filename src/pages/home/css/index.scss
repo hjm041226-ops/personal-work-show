@@ -37,6 +37,15 @@
   }
 }
 
+// 作品列表加载中 / 空态提示
+.works__state {
+  margin: 0;
+  padding-block: $space-2xl;
+  text-align: center;
+  @include type('body-md');
+  color: $color-on-surface-variant;
+}
+
 // ---------- 分类导航卡片 ----------
 .cat-card {
   padding: $space-md;

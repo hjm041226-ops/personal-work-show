@@ -4,7 +4,7 @@
  */
 export default {
   /**
-   * 进入作品详情页
+   * 进入作品详情页（路由 /work/{id}，id 为后端 PRJ-xxxx）
    * @param {object} payload
    * @param {object} work 作品对象
    */
@@ -12,12 +12,53 @@ export default {
     payload.router.push({ name: 'work-detail', params: { id: work.id } })
   },
 
+  /** 初始化：并发拉取分类字典与作品列表 */
+  init(payload) {
+    payload.loadCategories()
+    payload.loadWorks()
+  },
+
   /**
-   * 切换分类（静态演示：仅更新激活态，不做过滤；优化轮接入过滤逻辑）
+   * 拉取公开分类字典（P2），并把「全部」置为首项
    * @param {object} payload
-   * @param {string} category 分类名
    */
-  chooseCategory(payload, category) {
-    payload.activeCategory = category
+  async loadCategories(payload) {
+    try {
+      const res = await payload.api.fetchCategories()
+      const list = (res && res.data) || []
+      payload.categories = [{ key: '', label: '全部' }, ...list]
+    } catch (err) {
+      payload.message.error(err.message)
+    }
+  },
+
+  /**
+   * 拉取作品列表（P1）；选中分类时携带 categoryKey
+   * @param {object} payload
+   */
+  async loadWorks(payload) {
+    payload.loading = true
+    try {
+      const params = payload.activeCategoryKey ? { categoryKey: payload.activeCategoryKey } : {}
+      const res = await payload.api.fetchWorks(params)
+      payload.works = (res && res.data && res.data.list) || []
+    } catch (err) {
+      payload.message.error(err.message)
+    } finally {
+      payload.loading = false
+    }
+  },
+
+  /**
+   * 切换分类并重新拉取列表（key 为空串 = 全部）
+   * @param {object} payload
+   * @param {string} key 分类枚举键 web/app/desktop/others 或 ''
+   */
+  async chooseCategory(payload, key) {
+    if (payload.activeCategoryKey === key) {
+      return
+    }
+    payload.activeCategoryKey = key
+    await payload.loadWorks()
   },
 }

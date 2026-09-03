@@ -57,6 +57,7 @@ const payload = useContactAssemble()
                 type="primary"
                 html-type="submit"
                 block
+                :disabled="payload.submitting"
               >
                 <span>发送消息</span>
               </a-button>

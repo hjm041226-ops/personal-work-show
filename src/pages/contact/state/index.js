@@ -9,5 +9,6 @@ export function createState() {
       email: '',
       message: '',
     },
+    submitting: false, // 提交中防重复
   }
 }

@@ -15,8 +15,15 @@ const payload = useWorkDetailAssemble()
         </button>
       </div>
 
-      <!-- 未找到作品 -->
-      <template v-if="payload.notFound">
+      <!-- 加载中 -->
+      <template v-if="payload.loading">
+        <div class="pf-container">
+          <p class="page-detail__loading">正在加载作品…</p>
+        </div>
+      </template>
+
+      <!-- 未找到作品（后端 code 40401） -->
+      <template v-else-if="payload.notFound">
         <div class="pf-container">
           <div class="page-detail__missing">
             <h1 class="page-detail__missing-title">未找到该作品</h1>
@@ -36,14 +43,19 @@ const payload = useWorkDetailAssemble()
         <section class="pf-container page-detail__section">
           <div class="page-detail__crumb">
             <span class="page-detail__crumb-cat">案例研究</span>
-            <span class="page-detail__crumb-sep">/</span>
-            <span class="page-detail__crumb-sub">{{ payload.work.category }}</span>
+            <template v-if="payload.work.category">
+              <span class="page-detail__crumb-sep">/</span>
+              <span class="page-detail__crumb-sub">{{ payload.work.category }}</span>
+            </template>
           </div>
           <h1 class="page-detail__title">{{ payload.work.title }}</h1>
         </section>
 
         <!-- 技术栈标签 -->
-        <section class="pf-container page-detail__section">
+        <section
+          v-if="payload.work.tags && payload.work.tags.length"
+          class="pf-container page-detail__section"
+        >
           <div class="page-detail__tags">
             <span v-for="tag in payload.work.tags" :key="tag" class="page-detail__tag">
               {{ tag }}
@@ -53,20 +65,28 @@ const payload = useWorkDetailAssemble()
 
         <!-- 功能介绍与核心大图 -->
         <section class="pf-container page-detail__section">
-          <p class="page-detail__desc">{{ payload.work.desc }}</p>
+          <p v-if="payload.work.desc" class="page-detail__desc">{{ payload.work.desc }}</p>
           <div class="page-detail__hero">
             <div
               class="page-detail__hero-bg"
-              :style="{ backgroundImage: `url('${payload.work.image}')` }"
+              :style="
+                payload.work.image ? { backgroundImage: `url('${payload.work.image}')` } : null
+              "
             ></div>
             <div class="page-detail__hero-veil"></div>
-            <div class="page-detail__hero-bar">
-              <div class="page-detail__hero-status">
+            <div
+              v-if="
+                payload.work.overlayLabel ||
+                (payload.work.stats && payload.work.stats.length)
+              "
+              class="page-detail__hero-bar"
+            >
+              <div v-if="payload.work.overlayLabel" class="page-detail__hero-status">
                 <span class="page-detail__hero-dot"></span>
                 <span class="page-detail__hero-label">{{ payload.work.overlayLabel }}</span>
               </div>
-              <div class="page-detail__hero-stats">
-                <template v-for="(stat, index) in payload.work.stats" :key="stat.label">
+              <div v-if="payload.work.stats && payload.work.stats.length" class="page-detail__hero-stats">
+                <template v-for="(stat, index) in payload.work.stats || []" :key="stat.label">
                   <span v-if="index > 0" class="page-detail__hero-sep">|</span>
                   <span class="page-detail__hero-stat">
                     {{ stat.label }}：{{ stat.value }}
@@ -77,11 +97,11 @@ const payload = useWorkDetailAssemble()
           </div>
         </section>
 
-        <!-- GitHub 查看源码 -->
+        <!-- GitHub 查看源码（公开契约暂不含仓库链接，先占位） -->
         <section class="pf-container page-detail__section page-detail__section--bottom">
           <div class="page-detail__cta">
             <span class="page-detail__cta-text">想要深入了解源码？</span>
-            <a-button class="page-detail__cta-btn" :href="payload.work.githubUrl || '#'">
+            <a-button class="page-detail__cta-btn" href="#">
               <span>在 GitHub 上查看源码</span>
               <span class="material-symbols-outlined page-detail__cta-icon">code</span>
             </a-button>
