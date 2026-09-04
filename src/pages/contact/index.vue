@@ -68,22 +68,14 @@ const payload = useContactAssemble()
           <div class="page-contact__info">
             <div class="page-contact__info-card">
               <span class="page-contact__info-label">直接邮件</span>
-              <h3 class="page-contact__info-value">lin.chen.dev@university.edu</h3>
+              <h3 class="page-contact__info-value">hjm041226@gmail.com</h3>
               <p class="page-contact__info-desc">通常在 24 小时内回复。</p>
             </div>
 
             <div class="page-contact__info-card">
-              <span class="page-contact__info-label">所在位置</span>
-              <h3 class="page-contact__info-value">中国 / 可远程</h3>
-              <p class="page-contact__info-desc">接受全球范围的远程协作。</p>
-            </div>
-
-            <div class="page-contact__info-card">
-              <span class="page-contact__info-label">社交网络</span>
+              <span class="page-contact__info-label">个人仓库</span>
               <div class="page-contact__socials">
-                <a class="page-contact__social" href="#">GitHub — @linchen</a>
-                <a class="page-contact__social" href="#">Twitter — @linchen_dev</a>
-                <a class="page-contact__social" href="#">LinkedIn — Lin Chen</a>
+                <a class="page-contact__social" href="https://github.com/hjm041226-ops">GitHub — @hjm041226-ops</a>
               </div>
             </div>
           </div>

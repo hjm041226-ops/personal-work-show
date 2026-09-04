@@ -4,16 +4,14 @@
  */
 export function useSiteMeta() {
   return {
-    brand: '林晨 — 开发与设计',
+    brand: '个人作品集',
     navItems: [
       { key: 'works', label: '作品集', to: '/' },
       { key: 'contact', label: '联系我', to: '/contact' },
     ],
     socials: [
-      { label: 'GitHub', href: '#' },
-      { label: 'Twitter', href: '#' },
-      { label: 'LinkedIn', href: '#' },
+      { label: 'GitHub', href: 'https://github.com/hjm041226-ops' },
     ],
-    footerText: '© 2024 林晨. 保留所有权利。',
+    footerText: '© 2026 ordinary 保留所有权利。',
   }
 }

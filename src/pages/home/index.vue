@@ -81,48 +81,6 @@ const payload = useHomeAssemble()
             </article>
           </div>
         </section>
-
-        <!-- 技术方法 / 简介 -->
-        <section class="philosophy">
-          <div class="philosophy__grid">
-            <div class="philosophy__copy">
-              <span class="philosophy__eyebrow">技术方法</span>
-              <h2 class="philosophy__title">将严谨的工程与无妥协的视觉韵律完美融合。</h2>
-              <p class="philosophy__text">
-                每个项目都从底层构建，专注于优化的包体积、可访问的键盘导航，以及作为核心结构元素的排版设计。
-              </p>
-              <div class="philosophy__stack">
-                <div>
-                  <h4 class="philosophy__stack-title">前端</h4>
-                  <p class="philosophy__stack-text">
-                    React, Next.js, Vue 3, Tailwind CSS, TypeScript, Three.js, WebGL
-                  </p>
-                </div>
-                <div>
-                  <h4 class="philosophy__stack-title">后端</h4>
-                  <p class="philosophy__stack-text">
-                    Node.js, PostgreSQL, Redis, IndexedDB, REST &amp; GraphQL APIs
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <div class="philosophy__card">
-              <div class="philosophy__card-item">
-                <span class="philosophy__card-label">当前探索</span>
-                <h3 class="philosophy__card-value">空间计算与本地优先架构</h3>
-              </div>
-              <div class="philosophy__card-item">
-                <span class="philosophy__card-label">教育背景</span>
-                <h3 class="philosophy__card-value">计算机科学学士 • 预计 2025 年毕业</h3>
-              </div>
-              <div class="philosophy__card-item philosophy__card-item--last">
-                <span class="philosophy__card-label">联系方式</span>
-                <h3 class="philosophy__card-value">lin.chen.dev@university.edu</h3>
-              </div>
-            </div>
-          </div>
-        </section>
       </div>
     </div>
   </main>
