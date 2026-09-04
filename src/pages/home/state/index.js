@@ -9,6 +9,7 @@ export function createState() {
     categories: [{ key: '', label: '全部' }],
     // 当前选中分类枚举键（'' = 全部，不传 categoryKey）
     activeCategoryKey: '',
-    loading: false,
+    // 初始为 true：首屏显示骨架而非空态闪烁，拉取结束后置 false
+    loading: true,
   }
 }

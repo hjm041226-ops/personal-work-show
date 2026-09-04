@@ -61,4 +61,17 @@ export default {
     payload.activeCategoryKey = key
     await payload.loadWorks()
   },
+
+  /** Hero「浏览作品」：平滑滚动到作品区 */
+  scrollToWorks(payload) {
+    const el = document.getElementById('pf-works')
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    }
+  },
+
+  /** 其余作品（去掉首条精选） */
+  restWorks(payload) {
+    return payload.works.slice(1)
+  },
 }

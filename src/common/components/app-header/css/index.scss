@@ -1,4 +1,4 @@
-// AppHeader —— 组件样式
+// AppHeader —— 暗色玻璃导航
 // tokens/mixins 已由 vite additionalData 注入，无需重复 @use
 
 .pf-header {
@@ -8,9 +8,9 @@
   z-index: 50;
   width: 100%;
   background-color: $color-surface-80;
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.04);
+  backdrop-filter: blur(18px) saturate(140%);
+  -webkit-backdrop-filter: blur(18px) saturate(140%);
+  border-bottom: 1px solid $color-outline-variant-20;
 
   &__container {
     @include container;
@@ -20,34 +20,75 @@
     height: $header-height;
   }
 
+  // 品牌：琥珀方块 + 字标
   &__brand {
+    display: inline-flex;
+    align-items: center;
+    gap: $space-xs;
     @include type('headline-sm');
+    font-weight: 700;
     color: $color-on-surface;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.12em;
+    transition: opacity 0.2s ease;
+
+    &::before {
+      content: '';
+      width: 9px;
+      height: 9px;
+      flex-shrink: 0;
+      border-radius: 2px;
+      background-color: $color-primary;
+      box-shadow: 0 0 0 4px rgba(255, 138, 80, 0.12);
+    }
+
+    &:hover {
+      opacity: 0.82;
+    }
   }
 
   &__nav {
     display: none;
     align-items: center;
-    gap: $space-md;
+    gap: $space-xl;
     @include respond(md) {
       display: flex;
     }
   }
 
   &__link {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    padding-block: 0.5rem;
     @include type('body-md');
+    font-weight: 500;
     color: $color-on-surface-variant;
     transition: color 0.2s ease;
+
+    &::after {
+      content: '';
+      position: absolute;
+      right: 0;
+      bottom: 2px;
+      left: 0;
+      height: 2px;
+      border-radius: 1px;
+      background-color: $color-primary;
+      transform: scaleX(0);
+      transform-origin: center;
+      transition: transform 0.25s ease;
+    }
 
     &:hover {
       color: $color-on-surface;
     }
 
     &--active {
-      color: $color-primary;
-      font-weight: 700;
+      color: $color-on-surface;
+
+      &::after {
+        transform: scaleX(1);
+      }
     }
   }
 }

@@ -1,5 +1,6 @@
 <script setup>
 import zhCN from 'ant-design-vue/es/locale/zh_CN'
+import { theme as antdTheme } from 'ant-design-vue'
 import { useRoute } from 'vue-router'
 
 import AppFooter from '@/common/components/app-footer/index.vue'
@@ -7,23 +8,29 @@ import AppHeader from '@/common/components/app-header/index.vue'
 
 const route = useRoute()
 
-// antd 主题令牌：与 demo 暖色编辑风格对齐（精确尺寸由各组件 css 覆盖）
+// antd 主题：深色算法 + 暖石墨/琥珀 tokens（精确尺寸由各组件 css 覆盖）
 const theme = {
+  algorithm: antdTheme.darkAlgorithm,
   token: {
-    colorPrimary: '#9d3e1a',
-    colorPrimaryHover: '#bd5630',
-    colorPrimaryActive: '#9d3e1a',
-    colorText: '#231916',
-    colorTextSecondary: '#56423c',
-    colorTextTertiary: '#8a726a',
-    colorBorder: '#ddc0b7',
-    colorBgContainer: '#fff8f6',
-    colorBgLayout: '#fff8f6',
-    colorLink: '#9d3e1a',
-    colorLinkHover: '#bd5630',
-    borderRadius: 2,
-    borderRadiusLG: 4,
-    borderRadiusSM: 2,
+    colorPrimary: '#ff8a50',
+    colorPrimaryHover: '#ffa06c',
+    colorPrimaryActive: '#e5733c',
+    colorText: '#f6ede6',
+    colorTextSecondary: '#b3a296',
+    colorTextTertiary: '#847468',
+    colorBorder: '#3a312a',
+    colorBorderSecondary: '#2b211b',
+    colorBgContainer: '#1d1713',
+    colorBgElevated: '#241c17',
+    colorBgLayout: '#161110',
+    colorBgSpotlight: '#241c17',
+    colorFillAlter: '#241c17',
+    colorLink: '#ff8a50',
+    colorLinkHover: '#ffa06c',
+    colorError: '#ffb4ab',
+    borderRadius: 6,
+    borderRadiusLG: 12,
+    borderRadiusSM: 4,
     fontFamily: "'Plus Jakarta Sans', 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif",
   },
 }

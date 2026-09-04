@@ -1,4 +1,4 @@
-// 首页 —— 组件样式（对应 demo「作品集 / 首页」页面）
+// 首页 —— 暗色技术先锋感（UI 第三轮样板）
 // tokens/mixins 已由 vite additionalData 注入
 
 .page-home {
@@ -6,178 +6,265 @@
   min-height: 100vh;
   padding-top: $header-height;
   background-color: $color-surface;
-
-  &__layout {
-    @include container;
-    display: flex;
-    flex-direction: column;
-    gap: $space-xl;
-    padding-block: $space-lg;
-
-    @include respond(lg) {
-      flex-direction: row;
-    }
-  }
-
-  &__sidebar {
-    width: 100%;
-    flex-shrink: 0;
-
-    @include respond(lg) {
-      width: 16rem; // lg:w-64
-    }
-  }
-
-  &__main {
-    display: flex;
-    flex: 1 1 auto;
-    flex-direction: column;
-    width: 100%;
-    min-width: 0;
-  }
 }
 
-// 作品列表加载中 / 空态提示
-.works__state {
-  margin: 0;
-  padding-block: $space-2xl;
-  text-align: center;
-  @include type('body-md');
-  color: $color-on-surface-variant;
-}
+// ============================================================
+// Hero
+// ============================================================
+.hero {
+  position: relative;
+  isolation: isolate;
 
-// ---------- 分类导航卡片 ----------
-.cat-card {
-  padding: $space-md;
-  border: 1px solid $color-outline-variant-20;
-  border-radius: $radius-xl;
-  background-color: $color-surface-container-low;
+  // 环境光 + 细网格纹理
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background-image:
+      radial-gradient(900px 520px at 14% -12%, $color-glow-primary, transparent 62%),
+      radial-gradient(760px 460px at 90% -8%, $color-glow-soft, transparent 60%),
+      linear-gradient(rgba(246, 237, 230, 0.022) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(246, 237, 230, 0.022) 1px, transparent 1px);
+    background-size:
+      auto,
+      auto,
+      100% 96px,
+      96px 100%;
+  }
 
-  @include respond(lg) {
-    position: sticky;
-    top: calc(#{$header-height} + #{$space-lg}); // lg:top-28
+  &__inner {
+    padding-block: clamp(3.5rem, 10vh, 7rem) clamp(2.75rem, 8vh, 5rem);
+    text-align: center;
+  }
+
+  &__kicker {
+    display: inline-flex;
+    align-items: center;
+    gap: $space-xs;
+    margin: 0;
+    @include type('label-sm');
+    color: $color-on-surface-variant;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+  }
+
+  &__kicker-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: $color-primary;
+    box-shadow: 0 0 0 4px rgba(255, 138, 80, 0.14);
   }
 
   &__title {
-    display: block;
-    margin-bottom: $space-sm;
-    @include type('label-sm');
-    color: $color-primary;
-    text-transform: uppercase;
-    letter-spacing: 0.1em; // tracking-widest
-  }
+    max-width: 60rem;
+    margin: 1.5rem auto 0;
+    font-size: clamp(2.4rem, 6.4vw, 5.25rem);
+    line-height: 1.06;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: $color-on-surface;
 
-  &__nav {
-    display: flex;
-    gap: 0.5rem; // gap-2
-    overflow-x: auto;
-    padding-bottom: 0.5rem; // pb-2
-
-    @include respond(lg) {
-      flex-direction: column;
-      overflow: visible;
-      padding-bottom: 0;
+    em {
+      font-style: normal;
+      background: linear-gradient(94deg, #ffc39e 0%, #ff8a50 55%, #e5733c 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
     }
   }
 
-  &__item {
-    flex: none;
-    padding: $space-xs $space-sm; // px-space-sm py-space-xs
-    border: 0;
-    border-radius: $radius-lg;
-    background: transparent;
-    @include type('label-md');
+  &__desc {
+    max-width: 42rem;
+    margin: 1.75rem auto 0;
+    @include type('body-lg');
     color: $color-on-surface-variant;
-    white-space: nowrap;
-    cursor: pointer;
-    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+
+  &__actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: $space-md $space-lg;
+    margin-top: 2.5rem;
+  }
+
+  &__btn.ant-btn.ant-btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: $space-2xs;
+    height: auto;
+    padding: 0.9rem 1.6rem;
+    border-radius: $radius-full;
+    border-color: transparent;
+    background-color: $color-primary;
+    color: $color-on-primary;
+    @include type('label-md');
+    box-shadow: 0 0 26px rgba(255, 138, 80, 0.22);
+    transition: background-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
 
     &:hover {
-      background-color: $color-surface-container;
-      color: $color-on-surface;
+      background-color: #ffa06c;
+      box-shadow: 0 0 34px rgba(255, 138, 80, 0.34);
+      transform: translateY(-1px);
     }
 
-    @include respond(lg) {
-      flex: 1 1 auto;
-      width: 100%;
+    &:active {
+      background-color: #e5733c;
+      transform: translateY(0);
+    }
+  }
+
+  &__btn-icon {
+    font-size: 18px;
+    line-height: 1;
+  }
+
+  &__ghost {
+    display: inline-flex;
+    align-items: center;
+    gap: $space-2xs;
+    padding-block: 0.75rem;
+    border-bottom: 1px solid $color-outline-variant-30;
+    @include type('body-md');
+    font-weight: 600;
+    color: $color-on-surface-variant;
+    transition: color 0.2s ease, border-color 0.2s ease;
+
+    &:hover {
+      color: $color-on-surface;
+      border-color: $color-primary;
+    }
+  }
+
+  &__ghost-icon {
+    font-size: 16px;
+    line-height: 1;
+    transition: transform 0.2s ease;
+
+    .hero__ghost:hover & {
+      transform: translateX(3px);
+    }
+  }
+}
+
+// ============================================================
+// 作品区
+// ============================================================
+.pf-works {
+  padding-bottom: $space-2xl;
+  scroll-margin-top: calc(#{$header-height} + #{$space-sm});
+}
+
+.pf-works__head {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: $space-2xs;
+  text-align: center;
+}
+
+.pf-works__kicker {
+  margin: 0;
+  @include type('label-sm');
+  color: $color-primary;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+}
+
+.pf-works__title {
+  margin: $space-2xs 0 0;
+  @include type('headline-md');
+  color: $color-on-surface;
+}
+
+.pf-works__count {
+  margin: $space-2xs 0 0;
+  @include type('body-sm');
+  color: $color-on-surface-variant;
+  white-space: nowrap;
+}
+
+// ---------- 分类过滤药丸 ----------
+.filter {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: $space-2xs;
+  margin-top: $space-lg;
+
+  &__pill {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.5rem 1.25rem;
+    border: 1px solid $color-outline-variant-30;
+    border-radius: $radius-full;
+    background-color: transparent;
+    @include type('body-sm');
+    font-weight: 600;
+    color: $color-on-surface-variant;
+    cursor: pointer;
+    transition: border-color 0.2s ease, color 0.2s ease, background-color 0.2s ease,
+      box-shadow 0.2s ease;
+
+    &:hover {
+      color: $color-on-surface;
+      border-color: rgba(246, 237, 230, 0.34);
     }
 
     &--active,
     &--active:hover {
+      border-color: $color-primary;
       background-color: $color-primary;
       color: $color-on-primary;
+      box-shadow: 0 0 0 4px rgba(255, 138, 80, 0.14);
     }
   }
 }
 
-// ---------- 精选作品区 ----------
-.works {
-  padding-bottom: $space-2xl;
-
-  &__top {
-    padding-bottom: $space-lg;
-  }
-
-  &__eyebrow {
-    display: block;
-    margin-bottom: $space-xs;
-    @include type('label-sm');
-    color: $color-primary;
-    text-transform: uppercase;
-    letter-spacing: 0.1em; // tracking-widest
-  }
-
-  &__title {
-    max-width: 48rem; // max-w-3xl
-    margin: 0;
-    @include headline-fluid('headline-xl');
-    color: $color-on-surface;
-  }
-
-  &__list {
-    display: flex;
-    flex-direction: column;
-    gap: $space-xl;
-    padding-top: $space-md;
-  }
-}
-
-// ---------- 作品卡片 ----------
-.work-card {
+// ---------- 列表状态 ----------
+.pf-works__list {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: $space-lg;
-  padding: $space-lg;
-  border-radius: $radius-xl;
-  background-color: $color-surface-container-low;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+  gap: $space-2xl;
+  margin-top: $space-xl;
+  transition: opacity 0.25s ease;
 
-  &:hover {
-    background-color: $color-surface-container;
+  &--busy {
+    opacity: 0.4;
+    pointer-events: none;
   }
+}
+
+// ---------- 精选作品 ----------
+.featured {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: $space-xl;
+  align-items: center;
+  cursor: pointer;
 
   @include respond(lg) {
-    flex-direction: row;
-  }
-
-  &--reverse {
-    @include respond(lg) {
-      flex-direction: row-reverse;
-    }
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+    gap: clamp(2rem, 4vw, 3.5rem);
   }
 
   &__media {
     position: relative;
     width: 100%;
-    height: 360px;
-    flex-shrink: 0;
+    aspect-ratio: 16 / 10.5;
     overflow: hidden;
-    border-radius: $radius-lg;
+    border: 1px solid rgba(246, 237, 230, 0.09);
+    border-radius: $radius-2xl;
+    background-color: $color-surface-container-low;
+    transition: border-color 0.35s ease;
 
-    @include respond(lg) {
-      width: 50%;
+    .featured:hover & {
+      border-color: rgba(255, 138, 80, 0.45);
     }
   }
 
@@ -187,57 +274,91 @@
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
-    transition: transform 0.7s ease;
-  }
+    transition: transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
 
-  &:hover &__media-bg {
-    transform: scale(1.05);
+    .featured:hover & {
+      transform: scale(1.045);
+    }
   }
 
   &__badge {
     position: absolute;
-    top: 1rem;
-    left: 1rem;
+    top: 1.25rem;
+    left: 1.25rem;
     z-index: 1;
     display: inline-flex;
     align-items: center;
-    padding: $space-3xs $space-xs; // px-space-xs py-space-3xs
+    padding: 0.35rem 0.85rem;
+    border: 1px solid rgba(246, 237, 230, 0.12);
     border-radius: $radius-full;
-    background-color: $color-surface-90;
+    background-color: rgba(15, 12, 10, 0.66);
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
     @include type('label-sm');
     color: $color-on-surface;
-    text-transform: uppercase;
-    letter-spacing: 0.05em; // tracking-wider
+    letter-spacing: 0.06em;
+  }
+
+  &__num {
+    position: absolute;
+    top: 0.75rem;
+    right: 1.5rem;
+    z-index: 1;
+    font-family: $font-headline;
+    font-style: italic;
+    font-weight: 500;
+    font-size: clamp(2.5rem, 4.5vw, 4rem);
+    line-height: 1;
+    color: transparent;
+    -webkit-text-stroke: 1px rgba(246, 237, 230, 0.4);
+    pointer-events: none;
   }
 
   &__body {
+    min-width: 0;
     display: flex;
-    flex: 1 1 auto;
     flex-direction: column;
-    justify-content: space-between;
-    gap: $space-md;
-    width: 100%;
+    align-items: flex-start;
   }
 
-  &__copy {
-    min-width: 0;
+  &__meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: $space-sm;
+    margin: 0;
+  }
+
+  &__cat {
+    @include type('label-sm');
+    color: $color-primary;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+  }
+
+  &__id {
+    @include type('body-sm');
+    font-family: $font-mono;
+    color: $color-outline;
   }
 
   &__title {
-    margin: 0 0 $space-xs;
-    @include type('headline-lg');
+    margin: $space-sm 0 0;
+    font-size: clamp(1.75rem, 3.1vw, 2.625rem);
+    line-height: 1.14;
+    font-weight: 700;
+    letter-spacing: -0.01em;
     color: $color-on-surface;
-    transition: color 0.2s ease;
-  }
+    transition: color 0.25s ease;
 
-  &:hover &__title {
-    color: $color-primary;
+    .featured:hover & {
+      color: #ffc7a2;
+    }
   }
 
   &__summary {
-    margin: 0 0 $space-md;
+    max-width: 38rem;
+    margin: $space-sm 0 0;
     @include type('body-lg');
     color: $color-on-surface-variant;
   }
@@ -245,131 +366,285 @@
   &__tags {
     display: flex;
     flex-wrap: wrap;
-    gap: $space-3xs;
+    gap: $space-2xs;
+    margin-top: $space-md;
   }
 
   &__tag {
-    display: inline-block;
-    padding: 0.25rem $space-3xs; // py-1 px-space-3xs
-    border-radius: $radius-default;
-    background-color: $color-surface;
+    display: inline-flex;
+    align-items: center;
+    padding: 0.3rem 0.85rem;
+    border: 1px solid rgba(246, 237, 230, 0.1);
+    border-radius: $radius-full;
+    background-color: rgba(246, 237, 230, 0.05);
     @include type('label-sm');
     color: $color-on-surface-variant;
   }
 
-  &__btn.ant-btn {
-    display: flex;
+  &__cta {
+    display: inline-flex;
     align-items: center;
-    justify-content: space-between;
     gap: $space-2xs;
-    width: 100%;
-    height: auto;
-    padding: $space-xs $space-md; // px-space-md py-space-xs
-    border-radius: $radius-default;
-    @include type('label-md');
-    transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+    margin-top: $space-lg;
+    padding-bottom: $space-2xs;
+    border-bottom: 1px solid rgba(255, 138, 80, 0.5);
+    @include type('body-md');
+    font-weight: 700;
+    color: $color-on-surface;
+    transition: color 0.2s ease, border-color 0.2s ease;
 
-    @include respond(lg) {
-      width: max-content;
+    .featured:hover & {
+      color: $color-primary;
+      border-color: $color-primary;
     }
   }
 
-  &__btn-icon {
-    font-size: 16px;
+  &__cta-icon {
+    font-size: 17px;
+    line-height: 1;
+    transition: transform 0.25s ease;
+
+    .featured:hover & {
+      transform: translateX(4px);
+    }
+  }
+}
+
+// ---------- 其余作品：编号行 ----------
+.rows {
+  display: flex;
+  flex-direction: column;
+  margin-top: $space-xs;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 2.5rem minmax(0, 1fr) auto;
+  grid-template-areas:
+    'index body arrow'
+    '.     media .';
+  align-items: center;
+  column-gap: $space-sm;
+  row-gap: $space-sm;
+  padding-block: $space-md;
+  border-top: 1px solid $color-outline-variant-20;
+  cursor: pointer;
+  transition: background-color 0.25s ease;
+
+  &:last-child {
+    border-bottom: 1px solid $color-outline-variant-20;
+  }
+
+  &:hover {
+    background-color: rgba(246, 237, 230, 0.025);
+  }
+
+  @include respond(md) {
+    grid-template-columns: 3rem minmax(0, 8.5rem) minmax(0, 1fr) auto;
+    grid-template-areas: 'index media body arrow';
+    column-gap: $space-lg;
+    padding-block: $space-lg;
+  }
+
+  @include respond(lg) {
+    grid-template-columns: 3.5rem minmax(0, 11rem) minmax(0, 1fr) auto;
+    column-gap: clamp(1.5rem, 3vw, 2.5rem);
+  }
+
+  &__index {
+    grid-area: index;
+    align-self: start;
+    margin-top: 0.35rem;
+    font-family: $font-headline;
+    font-style: italic;
+    font-weight: 500;
+    font-size: 1.25rem;
+    line-height: 1;
+    color: $color-outline;
+    transition: color 0.25s ease;
+
+    @include respond(md) {
+      margin-top: 0.4rem;
+    }
+
+    .row:hover & {
+      color: $color-primary;
+    }
+  }
+
+  &__media {
+    grid-area: media;
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+    border: 1px solid rgba(246, 237, 230, 0.08);
+    border-radius: $radius-xl;
+    background-color: $color-surface-container-low;
+
+    @include respond(md) {
+      align-self: center;
+    }
+  }
+
+  &__media-bg {
+    position: absolute;
+    inset: 0;
+  }
+
+  @at-root .row__media {
+    position: relative;
+
+    .row__media-bg {
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: cover;
+      transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+
+      .row:hover & {
+        transform: scale(1.05);
+      }
+    }
+  }
+
+  &__body {
+    grid-area: body;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: $space-2xs;
+    justify-content: center;
+  }
+
+  &__title {
+    margin: 0;
+    font-size: 1.125rem;
+    line-height: 1.4;
+    font-weight: 700;
+    letter-spacing: -0.005em;
+    color: $color-on-surface;
+    transition: color 0.25s ease;
+
+    @include respond(md) {
+      font-size: 1.25rem;
+    }
+
+    .row:hover & {
+      color: #ffc7a2;
+    }
+  }
+
+  &__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $space-2xs;
+  }
+
+  &__tag {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.2rem 0.7rem;
+    border: 1px solid rgba(246, 237, 230, 0.08);
+    border-radius: $radius-full;
+    background-color: rgba(246, 237, 230, 0.04);
+    @include type('label-sm');
+    font-size: 11px;
+    color: $color-on-surface-variant;
+  }
+
+  &__arrow {
+    grid-area: arrow;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    border: 1px solid $color-outline-variant-30;
+    border-radius: 50%;
+    color: $color-on-surface-variant;
+    transition: border-color 0.25s ease, color 0.25s ease, background-color 0.25s ease,
+      transform 0.25s ease;
+
+    @include respond(md) {
+      justify-self: end;
+    }
+
+    .row:hover & {
+      border-color: $color-primary;
+      background-color: rgba(255, 138, 80, 0.08);
+      color: $color-primary;
+      transform: translateX(3px);
+    }
+  }
+
+  &__arrow-icon {
+    font-size: 18px;
     line-height: 1;
   }
 }
 
-// ---------- 技术方法区 ----------
-.philosophy {
-  margin-bottom: $space-xl;
-  padding: $space-lg;
-  border-radius: $radius-xl;
-  background-color: $color-surface-container-low;
+// ---------- 骨架屏 ----------
+.skeleton {
+  display: flex;
+  flex-direction: column;
+  gap: $space-lg;
+  margin-top: $space-xl;
 
-  &__grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: $space-2xl;
-    align-items: center;
-
-    @include respond(md) {
-      grid-template-columns: 1fr 1fr;
-    }
+  &__featured {
+    height: clamp(280px, 38vw, 460px);
   }
 
-  &__eyebrow {
-    display: block;
-    margin-bottom: $space-xs;
-    @include type('label-sm');
-    color: $color-primary;
-    text-transform: uppercase;
-    letter-spacing: 0.1em; // tracking-widest
+  &__row {
+    height: 6rem;
   }
+
+  &__featured,
+  &__row {
+    border-radius: $radius-2xl;
+    background: linear-gradient(100deg, #1c1613 40%, #2a211b 50%, #1c1613 60%);
+    background-size: 220% 100%;
+    animation: pf-home-shimmer 1.5s ease-in-out infinite;
+  }
+}
+
+@keyframes pf-home-shimmer {
+  from {
+    background-position: 120% 0;
+  }
+  to {
+    background-position: -120% 0;
+  }
+}
+
+// ---------- 空态 ----------
+.empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: $space-xs;
+  padding-block: $space-2xl;
+  text-align: center;
 
   &__title {
-    margin: 0 0 $space-md;
-    @include headline-fluid('headline-lg');
+    margin: 0;
+    @include type('headline-md');
     color: $color-on-surface;
   }
 
   &__text {
-    margin: 0 0 $space-md;
-    @include type('body-lg');
+    margin: 0;
+    @include type('body-md');
     color: $color-on-surface-variant;
   }
 
-  &__stack {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: $space-md;
-    padding-top: $space-sm;
-  }
-
-  &__stack-title {
-    margin: 0 0 $space-3xs;
-    @include type('headline-sm');
-    color: $color-on-surface;
-  }
-
-  &__stack-text {
-    margin: 0;
-    @include type('body-sm');
-    color: $color-on-surface-variant;
-  }
-
-  &__card {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    gap: $space-lg;
-    padding: $space-lg;
-    border-radius: $radius-xl;
-    background-color: $color-surface;
-  }
-
-  &__card-item {
-    padding-bottom: $space-md;
-    border-bottom: 1px solid $color-outline-variant-30;
-
-    &--last {
-      padding-bottom: 0;
-      border-bottom: 0;
-    }
-  }
-
-  &__card-label {
-    display: block;
-    margin-bottom: $space-3xs;
-    @include type('label-sm');
-    color: $color-primary;
-    text-transform: uppercase;
-  }
-
-  &__card-value {
-    margin: 0;
-    @include type('headline-md');
-    color: $color-on-surface;
-    overflow-wrap: anywhere;
+  &__btn.ant-btn.ant-btn-primary {
+    display: inline-flex;
+    align-items: center;
+    height: auto;
+    margin-top: $space-sm;
+    padding: 0.6rem 1.5rem;
+    border-radius: $radius-full;
+    background-color: $color-primary;
+    color: $color-on-primary;
+    @include type('label-md');
   }
 }

@@ -42,7 +42,7 @@ const payload = useWorkDetailAssemble()
         <!-- 分类与名称 -->
         <section class="pf-container page-detail__section">
           <div class="page-detail__crumb">
-            <span class="page-detail__crumb-cat">案例研究</span>
+            <span class="page-detail__crumb-cat">作品详情</span>
             <template v-if="payload.work.category">
               <span class="page-detail__crumb-sep">/</span>
               <span class="page-detail__crumb-sub">{{ payload.work.category }}</span>

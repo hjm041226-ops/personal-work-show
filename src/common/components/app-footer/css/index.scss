@@ -1,9 +1,10 @@
-// AppFooter —— 组件样式
+// AppFooter —— 暗色页脚
 
 .pf-footer {
   width: 100%;
-  background-color: $color-surface-container-low;
-  padding-block: $space-xl;
+  border-top: 1px solid $color-outline-variant-20;
+  background-color: $color-surface-container-lowest;
+  padding-block: $space-lg;
 
   &__container {
     @include container;
@@ -31,11 +32,12 @@
 
   &__link {
     @include type('body-sm');
+    font-weight: 500;
     color: $color-on-surface-variant;
     transition: color 0.2s ease;
 
     &:hover {
-      color: $color-on-surface;
+      color: $color-primary;
     }
   }
 }

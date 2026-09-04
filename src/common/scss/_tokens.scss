@@ -1,73 +1,87 @@
 // ============================================================
-// 设计令牌 Design Tokens
-// 全部数值取自 demo（tailwind.config 覆盖值与 DESIGN.md）
+// 设计令牌 Design Tokens —— 深色「暖石墨 + 琥珀」体系
+// UI 改版方向：暗色·技术先锋感。角色命名沿用 M3 风格，
+// 数值整体切换为深色暖调，主强调色为琥珀(ember)。
 // ============================================================
 @use 'sass:map';
 
-// ---------- 颜色（Material You 暖色调，demo 使用到的全套） ----------
-$color-on-tertiary: #ffffff;
-$color-on-error-container: #93000a;
-$color-surface-tint: #a0401c;
-$color-inverse-surface: #392e2a;
-$color-outline-variant: #ddc0b7;
-$color-primary-container: #bd5630;
-$color-primary-fixed-dim: #ffb59c;
-$color-background: #fff8f6;
-$color-inverse-on-surface: #ffede8;
-$color-secondary-container: #ffab74;
-$color-secondary: #8e4e1f;
-$color-on-surface: #231916;
-$color-surface-container-highest: #f2ded8;
-$color-on-surface-variant: #56423c;
-$color-error: #ba1a1a;
-$color-on-secondary-container: #783d0f;
-$color-on-tertiary-fixed-variant: #004f53;
-$color-error-container: #ffdad6;
-$color-primary-fixed: #ffdbcf;
-$color-surface-container-lowest: #ffffff;
-$color-on-error: #ffffff;
-$color-surface-container-high: #f8e4de;
-$color-tertiary-fixed: #83f4fb;
-$color-on-primary-fixed: #390c00;
-$color-surface: #fff8f6;
-$color-tertiary-container: #008187;
-$color-on-primary-fixed-variant: #802a05;
-$color-tertiary-fixed-dim: #64d7de;
-$color-surface-variant: #f2ded8;
-$color-secondary-fixed-dim: #ffb689;
-$color-on-primary: #ffffff;
-$color-on-secondary-fixed-variant: #713708;
-$color-primary: #9d3e1a;
-$color-on-primary-container: #fffbff;
-$color-on-secondary: #ffffff;
-$color-on-secondary-fixed: #311300;
-$color-on-tertiary-fixed: #002022;
-$color-surface-dim: #ead6d0;
-$color-on-background: #231916;
-$color-surface-bright: #fff8f6;
+// ---------- 颜色（深色暖石墨表面 + 琥珀强调） ----------
+$color-background: #161110;
+$color-surface: #161110;
+$color-surface-dim: #100d0c;
+$color-surface-bright: #1c1613;
+$color-surface-container-lowest: #0f0c0a;
+$color-surface-container-low: #1d1713;
+$color-surface-container: #241c17;
+$color-surface-container-high: #2b221c;
+$color-surface-container-highest: #332a24;
+$color-surface-variant: #241c17;
+$color-on-background: #f6ede6;
+$color-on-surface: #f6ede6;
+$color-on-surface-variant: #b3a296;
+$color-inverse-surface: #efe3d9;
+$color-inverse-on-surface: #241b15;
+
+$color-outline: #7e6d62;
+$color-outline-variant: #3a312a;
+$color-surface-tint: #ff8a50;
+
+// 主强调色：琥珀 Ember
+$color-primary: #ff8a50;
+$color-on-primary: #200e04;
+$color-primary-container: #6b2f10;
+$color-on-primary-container: #ffdcc7;
+$color-primary-fixed: #ffdcc7;
+$color-primary-fixed-dim: #ffb185;
+$color-on-primary-fixed: #2a0f00;
+$color-on-primary-fixed-variant: #c96a35;
+$color-inverse-primary: #ffb185;
+
+// 次级：暖陶（hover/次要元素）
+$color-secondary: #e5a37f;
+$color-on-secondary: #31150a;
+$color-secondary-container: #7a4220;
+$color-on-secondary-container: #ffdcc7;
+$color-secondary-fixed: #ffdcc7;
+$color-secondary-fixed-dim: #ffc9ac;
+$color-on-secondary-fixed: #2a0f00;
+$color-on-secondary-fixed-variant: #ffab7a;
+
+// 第三级：冷青（少量点缀，可忽略使用）
+$color-tertiary: #63cbd2;
+$color-on-tertiary: #00363a;
+$color-tertiary-container: #004f53;
 $color-on-tertiary-container: #f4ffff;
-$color-inverse-primary: #ffb59c;
-$color-surface-container: #feeae4;
-$color-surface-container-low: #fff1ed;
-$color-outline: #8a726a;
-$color-secondary-fixed: #ffdbc7;
-$color-tertiary: #00666b;
+$color-tertiary-fixed: #83f4fb;
+$color-tertiary-fixed-dim: #64d7de;
+$color-on-tertiary-fixed: #002022;
+$color-on-tertiary-fixed-variant: #004f53;
+
+// 错误
+$color-error: #ffb4ab;
+$color-on-error: #690005;
+$color-error-container: #93000a;
+$color-on-error-container: #ffdad6;
 
 // ---------- 字体 ----------
-$font-headline: 'Playfair Display', Georgia, 'Times New Roman', serif;
+$font-headline: 'Playfair Display', Georgia, 'Times New Roman', serif; // 仅用于英文/数字装饰点缀
 $font-body: 'Plus Jakarta Sans', 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+$font-mono: ui-monospace, 'SF Mono', SFMono-Regular, Consolas, 'Liberation Mono', monospace;
 
-// 字号 / 行高 / 字重 / 字距（来自 demo tailwind fontSize 扩展）
+// 字号 / 行高 / 字重 / 字距
+// 深色技术先锋风：中文大标题使用重型无衬线（700），衬线仅保留给数字/英文点缀
 $type-map: (
-  'headline-xl': (font: serif, size: 56px, lh: 64px, weight: 500, ls: -0.02em),
-  'headline-lg': (font: serif, size: 40px, lh: 48px, weight: 500, ls: -0.01em),
-  'headline-md': (font: serif, size: 28px, lh: 36px, weight: 500, ls: normal),
-  'headline-sm': (font: serif, size: 20px, lh: 28px, weight: 600, ls: normal),
-  'body-lg': (font: sans, size: 18px, lh: 28px, weight: 400, ls: normal),
-  'body-md': (font: sans, size: 15px, lh: 24px, weight: 400, ls: normal),
-  'body-sm': (font: sans, size: 13px, lh: 20px, weight: 400, ls: normal),
-  'label-md': (font: sans, size: 13px, lh: 16px, weight: 500, ls: 0.04em),
-  'label-sm': (font: sans, size: 11px, lh: 14px, weight: 500, ls: 0.06em),
+  'display-xl': (font: sans, size: 72px, lh: 80px, weight: 700, ls: -0.03em),
+  'display-lg': (font: sans, size: 46px, lh: 56px, weight: 700, ls: -0.02em),
+  'headline-xl': (font: sans, size: 56px, lh: 64px, weight: 700, ls: -0.02em),
+  'headline-lg': (font: sans, size: 40px, lh: 48px, weight: 700, ls: -0.01em),
+  'headline-md': (font: sans, size: 28px, lh: 36px, weight: 700, ls: normal),
+  'headline-sm': (font: sans, size: 20px, lh: 28px, weight: 600, ls: normal),
+  'body-lg': (font: sans, size: 18px, lh: 30px, weight: 400, ls: normal),
+  'body-md': (font: sans, size: 15px, lh: 25px, weight: 400, ls: normal),
+  'body-sm': (font: sans, size: 13px, lh: 21px, weight: 400, ls: normal),
+  'label-md': (font: sans, size: 13px, lh: 16px, weight: 600, ls: 0.04em),
+  'label-sm': (font: sans, size: 11px, lh: 14px, weight: 600, ls: 0.08em),
 );
 
 // ---------- 间距 ----------
@@ -82,27 +96,31 @@ $space-2xl: 6rem;
 $margin-page: 5vw;
 $gutter-grid: 2rem;
 
-// ---------- 圆角（以 demo 代码中的覆盖值为准，非 DESIGN.md） ----------
-$radius-default: 0.125rem; // rounded（2px）
-$radius-lg: 0.25rem; // rounded-lg（4px）
-$radius-xl: 0.5rem; // rounded-xl（8px）
-$radius-full: 0.75rem; // rounded-full（12px，demo 覆盖值）
+// ---------- 圆角 ----------
+$radius-default: 0.125rem; // 2px
+$radius-lg: 0.25rem; // 4px
+$radius-xl: 0.5rem; // 8px
+$radius-2xl: 1.25rem; // 20px（首页大图卡片）
+$radius-full: 9999px; // 药丸
 
 // ---------- 布局常量 ----------
 $container-max: 1440px;
-$header-height: 5rem; // h-20
-$page-top-space: $header-height; // main pt-20
+$header-height: 5rem; // 80px
+$page-top-space: $header-height;
 
-// ---------- 常用派生色（半透明叠加，来自 demo 的 /opacity 用法） ----------
-$color-surface-80: rgba(255, 248, 246, 0.8); // bg-surface/80（header）
-$color-surface-90: rgba(255, 248, 246, 0.9); // bg-surface/90（角标等）
-$color-outline-variant-20: rgba(221, 192, 183, 0.2); // border-outline-variant/20
-$color-outline-variant-30: rgba(221, 192, 183, 0.3); // border-outline-variant/30（输入框）
-$color-on-surface-40: rgba(35, 25, 22, 0.4); // 大图渐变遮罩 from-on-surface/40
+// ---------- 派生色（半透明叠加） ----------
+$color-surface-80: rgba(22, 17, 16, 0.8);
+$color-surface-90: rgba(22, 17, 16, 0.92);
+$color-outline-variant-20: rgba(246, 237, 230, 0.08); // 发丝分隔线
+$color-outline-variant-30: rgba(246, 237, 230, 0.14); // 可见描边
+$color-on-surface-40: rgba(8, 6, 5, 0.66); // 大图底部暗角
+// 首页环境光
+$color-glow-primary: rgba(255, 138, 80, 0.14);
+$color-glow-soft: rgba(255, 177, 133, 0.07);
 
 // ============================================================
 // 工具：排版
-// 用法：@include type('headline-xl');
+// 用法：@include type('display-xl');
 // ============================================================
 @mixin type($key) {
   $t: map.get($type-map, $key);
@@ -117,7 +135,7 @@ $color-on-surface-40: rgba(35, 25, 22, 0.4); // 大图渐变遮罩 from-on-surfa
   letter-spacing: map.get($t, 'ls');
 }
 
-// 小尺寸视口下大标题等比缩小 20%（DESIGN.md：超过 32px 的标题）
+// 小视口下超过 32px 的标题等比缩小 20%
 @mixin headline-fluid($key) {
   $t: map.get($type-map, $key);
   @include type($key);

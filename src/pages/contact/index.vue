@@ -11,9 +11,9 @@ const payload = useContactAssemble()
         <!-- 标题区 -->
         <div class="page-contact__heading">
           <span class="page-contact__eyebrow">Get in Touch / 联系方式</span>
-          <h1 class="page-contact__title">期待与您交流合作、实习机会或技术探讨。</h1>
+          <h1 class="page-contact__title">对哪个作品好奇，或想一起做点什么？</h1>
           <p class="page-contact__intro">
-            如果您有任何关于 Web 开发、数字工具或算法项目的问题，或者想探讨潜在的合作机会，欢迎随时通过表单或直接通过邮件与我联系。
+            每个作品都开源在 GitHub。如果对实现细节、实习机会或合作想法感兴趣，欢迎通过下面的表单或直接邮件联系我，通常会尽快回复。
           </p>
         </div>
 
