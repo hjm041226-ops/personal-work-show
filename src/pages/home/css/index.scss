@@ -233,6 +233,7 @@
   gap: $space-2xl;
   margin-top: $space-xl;
   transition: opacity 0.25s ease;
+  margin: 20px 10px;
 
   &--busy {
     opacity: 0.4;
@@ -309,8 +310,7 @@
     font-weight: 500;
     font-size: clamp(2.5rem, 4.5vw, 4rem);
     line-height: 1;
-    color: transparent;
-    -webkit-text-stroke: 1px rgba(246, 237, 230, 0.4);
+    color: $color-primary;
     pointer-events: none;
   }
 
@@ -428,6 +428,8 @@
   row-gap: $space-sm;
   padding-block: $space-md;
   border-top: 1px solid $color-outline-variant-20;
+  padding: 0 10px;
+  border-radius: 10px;
   cursor: pointer;
   transition: background-color 0.25s ease;
 
@@ -460,15 +462,11 @@
     font-weight: 500;
     font-size: 1.25rem;
     line-height: 1;
-    color: $color-outline;
+    color: $color-primary;
     transition: color 0.25s ease;
 
     @include respond(md) {
       margin-top: 0.4rem;
-    }
-
-    .row:hover & {
-      color: $color-primary;
     }
   }
 

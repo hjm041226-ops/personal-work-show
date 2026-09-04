@@ -54,6 +54,18 @@ const articleHtml = computed(() => {
 
       <!-- 作品详情 -->
       <template v-else-if="payload.work">
+        <!-- GitHub 查看源码：右上角固定胶囊（不遮挡正文）；repo 为空则不显示 -->
+        <a
+          v-if="payload.work.repo"
+          class="page-detail__source"
+          :href="payload.work.repo"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <span class="material-symbols-outlined page-detail__source-icon">code</span>
+          <span>在 GitHub 上查看源码</span>
+        </a>
+
         <!-- 分类与名称 -->
         <section class="pf-container page-detail__section">
           <div class="page-detail__crumb">
@@ -118,25 +130,6 @@ const articleHtml = computed(() => {
           class="pf-container page-detail__section page-detail__section--article"
         >
           <article class="page-detail__article markdown-body" v-html="articleHtml"></article>
-        </section>
-
-        <!-- GitHub 查看源码（公开详情 repo 字段；为空则不展示该区） -->
-        <section
-          v-if="payload.work.repo"
-          class="pf-container page-detail__section page-detail__section--bottom"
-        >
-          <div class="page-detail__cta">
-            <span class="page-detail__cta-text">想要深入了解源码？</span>
-            <a-button
-              class="page-detail__cta-btn"
-              :href="payload.work.repo"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <span>在 GitHub 上查看源码</span>
-              <span class="material-symbols-outlined page-detail__cta-icon">code</span>
-            </a-button>
-          </div>
         </section>
       </template>
     </div>

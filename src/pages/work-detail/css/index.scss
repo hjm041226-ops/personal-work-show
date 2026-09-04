@@ -21,6 +21,41 @@
     width: 100%;
   }
 
+  // GitHub 源码：右上角固定胶囊，正文区是 sticky 整屏舞台，此钮固定不随正文遮挡
+  &__source {
+    position: fixed;
+    top: calc(#{$header-height} + #{$space-md});
+    right: $margin-page;
+    z-index: 30;
+    display: inline-flex;
+    align-items: center;
+    gap: $space-2xs;
+    max-width: min(16rem, 62vw);
+    padding: 0.5rem 1rem 0.5rem 0.8rem;
+    border: 1px solid $color-outline-variant-30;
+    border-radius: $radius-full;
+    background-color: rgba(29, 23, 19, 0.78);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    @include type('body-sm');
+    font-weight: 600;
+    color: $color-on-surface;
+    box-shadow: 0 8px 26px rgba(0, 0, 0, 0.3);
+    white-space: nowrap;
+    transition: border-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+
+    &:hover {
+      border-color: $color-primary;
+      color: $color-primary;
+      transform: translateY(-1px);
+    }
+  }
+
+  &__source-icon {
+    font-size: 18px;
+    line-height: 1;
+  }
+
   &__back-row {
     padding-top: $space-md;
   }
@@ -234,11 +269,29 @@
   }
 
   // ---------- Markdown 正文(公开 desc,由 marked 渲染 + DOMPurify 净化) ----------
+  // 阅读舞台：sticky 占满一屏(导航下沿到视口底)。正文短→伪元素撑开使其垂直居中；
+  // 正文超长→伪元素坍缩，舞台内部滚动、顶部可正常读到(避免“居中剪裁顶部”的滚动陷阱)。
   &__section--article {
-    padding-top: $space-lg;
+    position: sticky;
+    top: $header-height;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-y: auto;
+    height: calc(100vh - #{$header-height});
+    padding-block: $space-lg $space-xl;
+
+    &::before,
+    &::after {
+      content: '';
+      flex: 1 1 1px;
+      min-height: 1px;
+    }
   }
 
   &__article {
+    flex: none;
+    width: 100%;
     max-width: 64rem;
     color: $color-on-surface-variant;
     font-size: 15px;
