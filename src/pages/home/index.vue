@@ -18,7 +18,7 @@ const payload = useHomeAssemble()
           再让它们自己说话。
         </h1>
         <p class="hero__desc">
-          我写前端、后端与算法，也在意像素、节奏与手感——这里的每个作品都开源在 GitHub，源码与实现思路都欢迎点进去看。
+          这里的每个作品都开源在 GitHub，源码与实现思路都欢迎点进去看。
         </p>
         <div class="hero__actions">
           <a-button class="hero__btn" type="primary" @click="payload.scrollToWorks()">
@@ -108,7 +108,6 @@ const payload = useHomeAssemble()
               </div>
               <span class="featured__cta">
                 <span>查看作品详情</span>
-                <span class="material-symbols-outlined featured__cta-icon">arrow_forward</span>
               </span>
             </div>
           </article>

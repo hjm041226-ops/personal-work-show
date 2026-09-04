@@ -120,11 +120,19 @@ const articleHtml = computed(() => {
           <article class="page-detail__article markdown-body" v-html="articleHtml"></article>
         </section>
 
-        <!-- GitHub 查看源码（公开契约暂不含仓库链接，先占位） -->
-        <section class="pf-container page-detail__section page-detail__section--bottom">
+        <!-- GitHub 查看源码（公开详情 repo 字段；为空则不展示该区） -->
+        <section
+          v-if="payload.work.repo"
+          class="pf-container page-detail__section page-detail__section--bottom"
+        >
           <div class="page-detail__cta">
             <span class="page-detail__cta-text">想要深入了解源码？</span>
-            <a-button class="page-detail__cta-btn" href="#">
+            <a-button
+              class="page-detail__cta-btn"
+              :href="payload.work.repo"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <span>在 GitHub 上查看源码</span>
               <span class="material-symbols-outlined page-detail__cta-icon">code</span>
             </a-button>
