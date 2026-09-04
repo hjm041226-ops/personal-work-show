@@ -1,7 +1,22 @@
 <script setup>
+import { computed } from 'vue'
+import { marked } from 'marked'
+import DOMPurify from 'dompurify'
 import { useWorkDetailAssemble } from './asserblem/index.js'
 
 const payload = useWorkDetailAssemble()
+
+/**
+ * 详情正文(公开契约 desc = Markdown 原文,DB desc_md):
+ * 渲染成 HTML 前先用 DOMPurify 净化,避免 README 中的危险 HTML/事件属性。
+ * intro(引言,纯文本)不走这里,直接用插值输出。
+ */
+const articleHtml = computed(() => {
+  const md = payload.work && payload.work.desc
+  if (!md) return ''
+  const raw = marked.parse(md, { gfm: true, breaks: true })
+  return DOMPurify.sanitize(typeof raw === 'string' ? raw : '')
+})
 </script>
 
 <template>
@@ -63,9 +78,9 @@ const payload = useWorkDetailAssemble()
           </div>
         </section>
 
-        <!-- 功能介绍与核心大图 -->
+        <!-- 功能介绍引言与核心大图 -->
         <section class="pf-container page-detail__section">
-          <p v-if="payload.work.desc" class="page-detail__desc">{{ payload.work.desc }}</p>
+          <p v-if="payload.work.intro" class="page-detail__intro">{{ payload.work.intro }}</p>
           <div class="page-detail__hero">
             <div
               class="page-detail__hero-bg"
@@ -95,6 +110,14 @@ const payload = useWorkDetailAssemble()
               </div>
             </div>
           </div>
+        </section>
+
+        <!-- 作品正文（desc = Markdown，渲染为富文本） -->
+        <section
+          v-if="articleHtml"
+          class="pf-container page-detail__section page-detail__section--article"
+        >
+          <article class="page-detail__article markdown-body" v-html="articleHtml"></article>
         </section>
 
         <!-- GitHub 查看源码（公开契约暂不含仓库链接，先占位） -->

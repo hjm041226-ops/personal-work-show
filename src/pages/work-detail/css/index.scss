@@ -135,8 +135,8 @@
     color: $color-on-surface;
   }
 
-  // ---------- 功能介绍 ----------
-  &__desc {
+  // ---------- 详情引言(纯文本段落,intro 键) ----------
+  &__intro {
     max-width: 48rem;
     margin: 0 0 $space-md;
     @include type('body-lg');
@@ -231,6 +231,141 @@
 
   &__hero-sep {
     color: $color-outline-variant;
+  }
+
+  // ---------- Markdown 正文(公开 desc,由 marked 渲染 + DOMPurify 净化) ----------
+  &__section--article {
+    padding-top: $space-lg;
+  }
+
+  &__article {
+    max-width: 64rem;
+    color: $color-on-surface-variant;
+    font-size: 15px;
+    line-height: 1.75;
+    overflow-wrap: break-word;
+
+    // v-html 里的元素没有 scoped 属性,必须用 :deep()
+    :deep(:first-child) {
+      margin-top: 0;
+    }
+
+    :deep(h1),
+    :deep(h2),
+    :deep(h3),
+    :deep(h4) {
+      margin: 1.6em 0 0.6em;
+      font-weight: 700;
+      color: $color-on-surface;
+      line-height: 1.3;
+    }
+
+    :deep(h1) {
+      font-size: 1.6rem;
+    }
+
+    :deep(h2) {
+      font-size: 1.35rem;
+      padding-bottom: 0.3em;
+      border-bottom: 1px solid $color-outline-variant;
+    }
+
+    :deep(h3) {
+      font-size: 1.15rem;
+    }
+
+    :deep(h4) {
+      font-size: 1rem;
+    }
+
+    :deep(p) {
+      margin: 0.8em 0;
+    }
+
+    :deep(a) {
+      color: $color-primary;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+
+      &:hover {
+        opacity: 0.8;
+      }
+    }
+
+    :deep(ul),
+    :deep(ol) {
+      margin: 0.8em 0;
+      padding-left: 1.4em;
+    }
+
+    :deep(li) {
+      margin: 0.3em 0;
+    }
+
+    :deep(img) {
+      display: block;
+      max-width: 100%;
+      height: auto;
+      margin: 1em auto;
+      border-radius: $radius-xl;
+    }
+
+    :deep(blockquote) {
+      margin: 1em 0;
+      padding: 0.4em 1em;
+      border-left: 3px solid $color-primary;
+      background-color: $color-surface-container-low;
+      color: $color-on-surface-variant;
+    }
+
+    :deep(hr) {
+      margin: 1.6em 0;
+      border: 0;
+      border-top: 1px solid $color-outline-variant;
+    }
+
+    :deep(code) {
+      padding: 0.15em 0.4em;
+      border-radius: 4px;
+      background-color: $color-surface-container-high;
+      font-family: 'JetBrains Mono', 'Fira Code', ui-monospace, SFMono-Regular, Menlo, Consolas,
+        monospace;
+      font-size: 0.9em;
+    }
+
+    :deep(pre) {
+      margin: 1em 0;
+      padding: $space-md;
+      overflow-x: auto;
+      border-radius: $radius-lg;
+      background-color: $color-surface-container;
+      line-height: 1.6;
+
+      code {
+        padding: 0;
+        background: transparent;
+        font-size: 0.88em;
+      }
+    }
+
+    :deep(table) {
+      width: 100%;
+      margin: 1em 0;
+      border-collapse: collapse;
+      font-size: 0.95em;
+    }
+
+    :deep(th),
+    :deep(td) {
+      padding: 0.4em 0.7em;
+      border: 1px solid $color-outline-variant;
+      text-align: left;
+    }
+
+    :deep(th) {
+      background-color: $color-surface-container;
+      color: $color-on-surface;
+    }
   }
 
   // ---------- GitHub CTA ----------

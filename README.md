@@ -1,4 +1,4 @@
-# 林晨 — 开发与设计 · 个人作品网站（Vue3 展示站）
+# 个人作品网站（Vue3 展示站）
 
 个人作品展示站前端：Vue 3（组合式 API / `<script setup>`）+ Vue Router + ant-design-vue + Sass，数据来自 Go 后端公开组接口。
 
